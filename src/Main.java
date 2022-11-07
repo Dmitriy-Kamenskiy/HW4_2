@@ -15,22 +15,22 @@ public class Main {
                     Education.values()[new Random().nextInt(Education.values().length)])
             );
         }
-        int minors = (int) persons.stream().filter(minor -> minor.getAge()<18).count();
+        int minors = (int) persons.stream().filter(minor -> minor.getAge() < 18).count();
 
-        List <String> recruits = persons.stream().filter(recruit -> recruit.getAge()>17)
-                .filter(recruit -> recruit.getAge()<27)
-                .map(Person :: getFamily).collect(Collectors.toList());
+        List<String> recruits = persons.stream().filter(recruit -> recruit.getAge() > 17)
+                .filter(recruit -> recruit.getAge() < 27)
+                .map(Person::getFamily).collect(Collectors.toList());
 
-        List <Person> higherEducations = persons.stream().filter(h -> h.getEducation().equals(Education.HIGHER))
-                .filter(Main :: workingAge)
+        List<Person> higherEducations = persons.stream().filter(h -> h.getEducation().equals(Education.HIGHER))
+                .filter(Main::workingAge)
                 .sorted(Comparator.comparing(Person::getFamily))
                 .collect(Collectors.toList());
 
     }
 
-    static boolean workingAge(Person person){
+    static boolean workingAge(Person person) {
         if (person.getAge() > 17) {
-            return switch (person.getSex()){
+            return switch (person.getSex()) {
                 case MAN -> person.getAge() < 65;
                 case WOMAN -> person.getAge() < 60;
             };
